@@ -1,639 +1,1210 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>アゼルジー高山アズカ</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet" />
-  <style>
-    :root { --black: #0a0a0a; --white: #f5f5f0; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>アゼルジー高山アズカ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="icon"
+      href="https://avatars.githubusercontent.com/u/257209109?s=200&v=4"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --black: #0a0a0a;
+        --white: #f5f5f0;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      background-color: var(--black);
-      color: var(--white);
-      font-family: 'Space Mono', 'Noto Sans JP', monospace;
-      cursor: none;
-      overflow-x: hidden;
-    }
-    ::selection { background: var(--white); color: var(--black); }
+      body {
+        background-color: var(--black);
+        color: var(--white);
+        font-family: "Space Mono", "Noto Sans JP", monospace;
+        cursor: none;
+        overflow-x: hidden;
+      }
+      ::selection {
+        background: var(--white);
+        color: var(--black);
+      }
 
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9999; opacity: .4;
-    }
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 9999;
+        opacity: 0.4;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--black); }
-    ::-webkit-scrollbar-thumb { background: var(--white); }
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--black);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--white);
+      }
 
-    /* ── TICKER ── */
-    .ticker-wrap { overflow: hidden; border-top: 2px solid var(--white); border-bottom: 2px solid var(--white); background: var(--white); color: var(--black); }
-    .ticker-inner { display: flex; white-space: nowrap; animation: ticker 22s linear infinite; }
-    .ticker-inner span { padding: 0 2rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: .12em; }
-    @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+      /* ── TICKER ── */
+      .ticker-wrap {
+        overflow: hidden;
+        border-top: 2px solid var(--white);
+        border-bottom: 2px solid var(--white);
+        background: var(--white);
+        color: var(--black);
+      }
+      .ticker-inner {
+        display: flex;
+        white-space: nowrap;
+        animation: ticker 22s linear infinite;
+      }
+      .ticker-inner span {
+        padding: 0 2rem;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.1rem;
+        letter-spacing: 0.12em;
+      }
+      @keyframes ticker {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
 
-    /* ── BASE ── */
-    .brutalist-box { border: 2px solid var(--white); }
-    .tag { display: inline-block; border: 2px solid var(--white); padding: .15rem .6rem; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; }
-    .tag-inv { background: var(--white); color: var(--black); }
+      /* ── BASE ── */
+      .brutalist-box {
+        border: 2px solid var(--white);
+      }
+      .tag {
+        display: inline-block;
+        border: 2px solid var(--white);
+        padding: 0.15rem 0.6rem;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .tag-inv {
+        background: var(--white);
+        color: var(--black);
+      }
 
-    .skill-bar-track { height: 6px; background: #2a2a2a; width: 100%; }
-    .skill-bar-fill { height: 100%; background: var(--white); transition: width 1.4s cubic-bezier(.16,1,.3,1); width: 0; }
+      .skill-bar-track {
+        height: 6px;
+        background: #2a2a2a;
+        width: 100%;
+      }
+      .skill-bar-fill {
+        height: 100%;
+        background: var(--white);
+        transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        width: 0;
+      }
 
-    .section-label {
-      font-family: 'Bebas Neue', 'Noto Sans JP', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      letter-spacing: .06em;
-      border-bottom: 2px solid var(--white);
-      padding-bottom: .3rem;
-    }
+      .section-label {
+        font-family: "Bebas Neue", "Noto Sans JP", sans-serif;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 0.06em;
+        border-bottom: 2px solid var(--white);
+        padding-bottom: 0.3rem;
+      }
 
-    .card-hover { transition: transform .15s ease, box-shadow .15s ease; }
-    .card-hover:hover { transform: translate(-4px,-4px); box-shadow: 8px 8px 0 var(--white); }
-
-    /* ─────────────────────────────────────────────
-       FLIP TEXT
-       Key fix: .ft does NOT use overflow:hidden anymore.
-       Instead we clip with clip-path so the absolutely-
-       positioned .ft-en can be any width/height without
-       the parent needing a fixed size that might cut it.
-
-       For INLINE single-line text (.ft):
-         - parent is inline-block, height = 1 line
-         - clip-path clips to exact parent bounding box
-         - both layers slide vertically, clipped at edges
-
-       For BLOCK / paragraph text (.ft-block):
-         - parent is block, height = tallest child (ft-ja)
-         - ft-en positioned absolute, same height as ft-ja
-         - overflow:hidden clips the slide animation
-    ───────────────────────────────────────────── */
-
-    /* ── INLINE FLIP (.ft) ── */
-    .ft {
-      display: inline-block;
-      position: relative;
-      /* Use clip-path instead of overflow:hidden so
+      .card-hover {
+        transition:
+          transform 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      .card-hover:hover {
+        transform: translate(-4px, -4px);
+        box-shadow: 8px 8px 0 var(--white);
+      }
+      /* ── INLINE FLIP (.ft) ── */
+      .ft {
+        display: inline-block;
+        position: relative;
+        /* Use clip-path instead of overflow:hidden so
          longer EN text doesn't get horizontally clipped.
          clip-path clips exactly to the element box. */
-      overflow: hidden;
-      /* Height must accommodate the LONGEST of ja/en.
+        overflow: hidden;
+        /* Height must accommodate the LONGEST of ja/en.
          We set it via line-height; but we can't know which
          is longer at CSS-time, so we use a JS nudge below.
          Fallback: 1.5em covers most single-line cases. */
-      line-height: 1.5;
-      min-height: 1.5em;
-      vertical-align: middle;
-      /* Widen to fit whichever child is wider */
-      white-space: nowrap;
-    }
-    .ft-ja, .ft-en {
-      display: block;
-      white-space: nowrap;
-      transition: transform 0.42s cubic-bezier(.23,1,.32,1), opacity 0.35s ease;
-    }
-    .ft-en {
-      position: absolute;
-      top: 0; left: 0;
-      /* match parent width so it doesn't overflow */
-      min-width: 100%;
-      transform: translateY(110%);
-      opacity: 0;
-    }
-    .ft:hover .ft-ja { transform: translateY(-110%); opacity: 0; }
-    .ft:hover .ft-en  { transform: translateY(0);    opacity: 1; }
+        line-height: 1.5;
+        min-height: 1.5em;
+        vertical-align: middle;
+        /* Widen to fit whichever child is wider */
+        white-space: nowrap;
+      }
+      .ft-ja,
+      .ft-en {
+        display: block;
+        white-space: nowrap;
+        transition:
+          transform 0.42s cubic-bezier(0.23, 1, 0.32, 1),
+          opacity 0.35s ease;
+      }
+      .ft-en {
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* match parent width so it doesn't overflow */
+        min-width: 100%;
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      .ft:hover .ft-ja {
+        transform: translateY(-110%);
+        opacity: 0;
+      }
+      .ft:hover .ft-en {
+        transform: translateY(0);
+        opacity: 1;
+      }
 
-    /* ── BLOCK FLIP (.ft-block) ── */
-    .ft-block {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      /* height driven by ft-ja content */
-    }
-    .ft-block .ft-ja,
-    .ft-block .ft-en {
-      display: block;
-      white-space: normal;
-      transition: transform 0.42s cubic-bezier(.23,1,.32,1), opacity 0.35s ease;
-    }
-    .ft-block .ft-en {
-      position: absolute;
-      top: 0; left: 0; width: 100%;
-      transform: translateY(110%);
-      opacity: 0;
-    }
-    .ft-block:hover .ft-ja { transform: translateY(-110%); opacity: 0; }
-    .ft-block:hover .ft-en  { transform: translateY(0);     opacity: 1; }
+      /* ── BLOCK FLIP (.ft-block) ── */
+      .ft-block {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        /* height driven by ft-ja content */
+      }
+      .ft-block .ft-ja,
+      .ft-block .ft-en {
+        display: block;
+        white-space: normal;
+        transition:
+          transform 0.42s cubic-bezier(0.23, 1, 0.32, 1),
+          opacity 0.35s ease;
+      }
+      .ft-block .ft-en {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      .ft-block:hover .ft-ja {
+        transform: translateY(-110%);
+        opacity: 0;
+      }
+      .ft-block:hover .ft-en {
+        transform: translateY(0);
+        opacity: 1;
+      }
 
-    /* ── LANG CARD FLIP ──
+      /* ── LANG CARD FLIP ──
        Special case: the lang card NAME text (e.g. 日本語 → JAPANESE)
        is in Bebas Neue at 2xl. "JAPANESE" is wider than "日本語".
        Solution: set the .ft width to the MAX of both children
        by making it display:block within a fixed-width container,
        and letting overflow:hidden on the parent card clip it. */
-    .lang-name-flip {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      height: 2rem; /* matches text-2xl line height */
-    }
-    .lang-name-flip .ft-ja,
-    .lang-name-flip .ft-en {
-      display: block;
-      position: absolute;
-      top: 0; left: 0; width: 100%;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-      font-weight: bold;
-      letter-spacing: .1em;
-      white-space: nowrap;
-      line-height: 2rem;
-      transition: transform 0.42s cubic-bezier(.23,1,.32,1), opacity 0.35s ease;
-    }
-    .lang-name-flip .ft-en { transform: translateY(110%); opacity: 0; }
-    /* hover triggered by parent .lang-card */
-    .lang-card:hover .lang-name-flip .ft-ja { transform: translateY(-110%); opacity: 0; }
-    .lang-card:hover .lang-name-flip .ft-en  { transform: translateY(0);     opacity: 1; }
+      .lang-name-flip {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        height: 2rem; /* matches text-2xl line height */
+      }
+      .lang-name-flip .ft-ja,
+      .lang-name-flip .ft-en {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+        font-weight: bold;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+        line-height: 2rem;
+        transition:
+          transform 0.42s cubic-bezier(0.23, 1, 0.32, 1),
+          opacity 0.35s ease;
+      }
+      .lang-name-flip .ft-en {
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      /* hover triggered by parent .lang-card */
+      .lang-card:hover .lang-name-flip .ft-ja {
+        transform: translateY(-110%);
+        opacity: 0;
+      }
+      .lang-card:hover .lang-name-flip .ft-en {
+        transform: translateY(0);
+        opacity: 1;
+      }
 
-    /* same pattern for lang level label */
-    .lang-level-flip {
-      display: block;
-      position: relative;
-      overflow: hidden;
-      height: 1.2rem;
-      margin-top: .25rem;
-    }
-    .lang-level-flip .ft-ja,
-    .lang-level-flip .ft-en {
-      display: block;
-      position: absolute;
-      top: 0; left: 0; width: 100%;
-      font-size: .7rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: #9ca3af;
-      line-height: 1.2rem;
-      white-space: nowrap;
-      transition: transform 0.42s cubic-bezier(.23,1,.32,1), opacity 0.35s ease;
-    }
-    .lang-level-flip .ft-en { transform: translateY(110%); opacity: 0; }
-    .lang-card:hover .lang-level-flip .ft-ja { transform: translateY(-110%); opacity: 0; }
-    .lang-card:hover .lang-level-flip .ft-en  { transform: translateY(0);     opacity: 1; }
+      /* same pattern for lang level label */
+      .lang-level-flip {
+        display: block;
+        position: relative;
+        overflow: hidden;
+        height: 1.2rem;
+        margin-top: 0.25rem;
+      }
+      .lang-level-flip .ft-ja,
+      .lang-level-flip .ft-en {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-size: 0.7rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #9ca3af;
+        line-height: 1.2rem;
+        white-space: nowrap;
+        transition:
+          transform 0.42s cubic-bezier(0.23, 1, 0.32, 1),
+          opacity 0.35s ease;
+      }
+      .lang-level-flip .ft-en {
+        transform: translateY(110%);
+        opacity: 0;
+      }
+      .lang-card:hover .lang-level-flip .ft-ja {
+        transform: translateY(-110%);
+        opacity: 0;
+      }
+      .lang-card:hover .lang-level-flip .ft-en {
+        transform: translateY(0);
+        opacity: 1;
+      }
 
-    /* ── HERO NAME FLIP ── */
-    .hero-wrap { position: relative; display: inline-block; cursor: none; }
-    .hero-ja {
-      font-family: 'Noto Sans JP', sans-serif; font-weight: 900;
-      font-size: clamp(5rem, 17vw, 12rem); line-height: .88;
-      transition: transform 0.5s cubic-bezier(.23,1,.32,1), opacity 0.4s ease;
-    }
-    .hero-en {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(5rem, 17vw, 12rem); line-height: .88;
-      position: absolute; inset: 0;
-      display: flex; align-items: flex-start;
-      opacity: 0; transform: translateY(24px);
-      transition: transform 0.5s cubic-bezier(.23,1,.32,1), opacity 0.4s ease;
-    }
-    .hero-wrap:hover .hero-ja { opacity: 0; transform: translateY(-24px); }
-    .hero-wrap:hover .hero-en { opacity: 1; transform: translateY(0); }
+      /* ── HERO NAME FLIP ── */
+      .hero-wrap {
+        position: relative;
+        display: inline-block;
+        cursor: none;
+      }
+      .hero-ja {
+        font-family: "Noto Sans JP", sans-serif;
+        font-weight: 900;
+        font-size: clamp(5rem, 17vw, 12rem);
+        line-height: 0.88;
+        transition:
+          transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+          opacity 0.4s ease;
+      }
+      .hero-en {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(5rem, 17vw, 12rem);
+        line-height: 0.88;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: flex-start;
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          transform 0.5s cubic-bezier(0.23, 1, 0.32, 1),
+          opacity 0.4s ease;
+      }
+      .hero-wrap:hover .hero-ja {
+        opacity: 0;
+        transform: translateY(-24px);
+      }
+      .hero-wrap:hover .hero-en {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-    /* ── LANG CARD BG FILL ── */
-    .lang-card { position: relative; overflow: hidden; }
-    .lang-card::after { content: ''; position: absolute; inset: 0; background: var(--white); transform: translateY(100%); transition: transform .3s ease; z-index: 0; }
-    .lang-card:hover::after { transform: translateY(0); }
-    .lang-card:hover .lang-content { color: var(--black); z-index: 1; }
-    .lang-content { position: relative; z-index: 1; transition: color .3s ease; }
-    /* ensure flip elements inherit color transition */
-    .lang-card:hover .lang-name-flip .ft-ja,
-    .lang-card:hover .lang-name-flip .ft-en,
-    .lang-card:hover .lang-level-flip .ft-ja,
-    .lang-card:hover .lang-level-flip .ft-en { color: var(--black); }
+      /* ── LANG CARD BG FILL ── */
+      .lang-card {
+        position: relative;
+        overflow: hidden;
+      }
+      .lang-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: var(--white);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        z-index: 0;
+      }
+      .lang-card:hover::after {
+        transform: translateY(0);
+      }
+      .lang-card:hover .lang-content {
+        color: var(--black);
+        z-index: 1;
+      }
+      .lang-content {
+        position: relative;
+        z-index: 1;
+        transition: color 0.3s ease;
+      }
+      /* ensure flip elements inherit color transition */
+      .lang-card:hover .lang-name-flip .ft-ja,
+      .lang-card:hover .lang-name-flip .ft-en,
+      .lang-card:hover .lang-level-flip .ft-ja,
+      .lang-card:hover .lang-level-flip .ft-en {
+        color: var(--black);
+      }
 
-    /* ── MISC ── */
-    .blink { animation: blink 1.2s step-end infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+      /* ── MISC ── */
+      .blink {
+        animation: blink 1.2s step-end infinite;
+      }
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
 
-    .tech-marquee { overflow: hidden; }
-    .tech-inner { display: flex; gap: 1.5rem; white-space: nowrap; animation: marquee 18s linear infinite; }
-    .tech-inner:hover { animation-play-state: paused; }
-    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+      .tech-marquee {
+        overflow: hidden;
+      }
+      .tech-inner {
+        display: flex;
+        gap: 1.5rem;
+        white-space: nowrap;
+        animation: marquee 18s linear infinite;
+      }
+      .tech-inner:hover {
+        animation-play-state: paused;
+      }
+      @keyframes marquee {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
 
-    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-    .fade-up.visible { opacity: 1; transform: none; }
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+      .fade-up.visible {
+        opacity: 1;
+        transform: none;
+      }
 
-    /* ── GLITCH ── */
-    .glitch { position: relative; }
-    .glitch:hover::before,.glitch:hover::after { content:attr(data-text); position:absolute; top:0; left:0; width:100%; font-family:inherit; font-size:inherit; font-weight:inherit; }
-    .glitch:hover::before { color:#fff; clip:rect(0,900px,40px,0); animation:g1 .4s infinite linear; }
-    .glitch:hover::after  { color:#aaa; clip:rect(60px,900px,120px,0); animation:g2 .4s infinite linear; }
-    @keyframes g1 { 0%{clip:rect(10px,9999px,40px,0);transform:translate(-2px,0)} 50%{clip:rect(30px,9999px,60px,0);transform:translate(2px,0)} 100%{clip:rect(20px,9999px,50px,0);transform:translate(-2px,0)} }
-    @keyframes g2 { 0%{clip:rect(70px,9999px,100px,0);transform:translate(2px,0)} 50%{clip:rect(50px,9999px,80px,0);transform:translate(-2px,0)} 100%{clip:rect(60px,9999px,90px,0);transform:translate(2px,0)} }
+      /* ── GLITCH ── */
+      .glitch {
+        position: relative;
+      }
+      .glitch:hover::before,
+      .glitch:hover::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+      }
+      .glitch:hover::before {
+        color: #fff;
+        clip: rect(0, 900px, 40px, 0);
+        animation: g1 0.4s infinite linear;
+      }
+      .glitch:hover::after {
+        color: #aaa;
+        clip: rect(60px, 900px, 120px, 0);
+        animation: g2 0.4s infinite linear;
+      }
+      @keyframes g1 {
+        0% {
+          clip: rect(10px, 9999px, 40px, 0);
+          transform: translate(-2px, 0);
+        }
+        50% {
+          clip: rect(30px, 9999px, 60px, 0);
+          transform: translate(2px, 0);
+        }
+        100% {
+          clip: rect(20px, 9999px, 50px, 0);
+          transform: translate(-2px, 0);
+        }
+      }
+      @keyframes g2 {
+        0% {
+          clip: rect(70px, 9999px, 100px, 0);
+          transform: translate(2px, 0);
+        }
+        50% {
+          clip: rect(50px, 9999px, 80px, 0);
+          transform: translate(-2px, 0);
+        }
+        100% {
+          clip: rect(60px, 9999px, 90px, 0);
+          transform: translate(2px, 0);
+        }
+      }
 
-    /* ── PROFILE PIC ── */
-    .profile-box { position: relative; overflow: hidden; }
-    .profile-box img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; filter:grayscale(100%) contrast(1.1); transition:filter .4s ease; }
-    .profile-box:hover img { filter:grayscale(50%) contrast(1.05); }
-    .profile-box .pic-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(10,10,10,.85) 0%,transparent 55%); pointer-events:none; }
-    .profile-box .pic-label { position:absolute; bottom:0; left:0; right:0; padding:1rem; }
+      /* ── PROFILE PIC ── */
+      .profile-box {
+        position: relative;
+        overflow: hidden;
+      }
+      .profile-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+        filter: grayscale(100%) contrast(1.1);
+        transition: filter 0.4s ease;
+      }
+      .profile-box:hover img {
+        filter: grayscale(50%) contrast(1.05);
+      }
+      .profile-box .pic-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to top,
+          rgba(10, 10, 10, 0.85) 0%,
+          transparent 55%
+        );
+        pointer-events: none;
+      }
+      .profile-box .pic-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+      }
 
-    /* ── BG ── */
-    .grid-deco { background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px); background-size:48px 48px; }
+      /* ── BG ── */
+      .grid-deco {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 48px 48px;
+      }
 
-    /* ── CUSTOM CURSOR ── */
-    #custom-cursor {
-      position: fixed; top: 0; left: 0;
-      width: 20px; height: 20px;
-      transform: translate(-50%,-50%);
-      pointer-events: none; z-index: 99999;
-      mix-blend-mode: difference;
-      transition: transform 0.18s cubic-bezier(.23,1,.32,1);
-      will-change: left, top;
-    }
-    #custom-cursor .dot { width:100%; height:100%; background:#fff; border-radius:50%; }
-    #custom-cursor.expanded { transform: translate(-50%,-50%) scale(2.2); }
+      /* ── CUSTOM CURSOR ── */
+      #custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 99999;
+        mix-blend-mode: difference;
+        transition: transform 0.18s cubic-bezier(0.23, 1, 0.32, 1);
+        will-change: left, top;
+      }
+      #custom-cursor .dot {
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        border-radius: 50%;
+      }
+      #custom-cursor.expanded {
+        transform: translate(-50%, -50%) scale(2.2);
+      }
 
-    /* force cursor:none everywhere */
-    *, a, button, [role="button"], input, select, textarea { cursor: none !important; }
-  </style>
-</head>
-<body class="grid-deco">
+      /* force cursor:none everywhere */
+      *,
+      a,
+      button,
+      [role="button"],
+      input,
+      select,
+      textarea {
+        cursor: none !important;
+      }
+    </style>
+  </head>
+  <body class="grid-deco">
+    <div id="custom-cursor"><div class="dot"></div></div>
 
-  <div id="custom-cursor"><div class="dot"></div></div>
+    <!-- ══ NAV ══ -->
+    <header
+      id="top"
+      class="brutalist-box border-l-0 border-r-0 border-t-0 flex items-center justify-between px-6 py-3 sticky top-0 z-50 bg-black bg-opacity-95 backdrop-blur-sm"
+    >
+      <span class="font-mono text-sm tracking-widest uppercase text-gray-400">
+        <span class="ft"
+          ><span class="ft-ja">明日香：//ポートフォリオ</span
+          ><span class="ft-en">azuka://portfolio</span></span
+        >
+      </span>
+      <nav class="hidden md:flex gap-6 text-xs tracking-widest">
+        <a
+          href="#about"
+          class="hover:text-white text-gray-400 transition-colors"
+          ><span class="ft"
+            ><span class="ft-ja">自己紹介</span
+            ><span class="ft-en">ABOUT</span></span
+          ></a
+        >
+        <a
+          href="#skills"
+          class="hover:text-white text-gray-400 transition-colors"
+          ><span class="ft"
+            ><span class="ft-ja">スキル</span
+            ><span class="ft-en">SKILLS</span></span
+          ></a
+        >
+        <a
+          href="#langs"
+          class="hover:text-white text-gray-400 transition-colors"
+          ><span class="ft"
+            ><span class="ft-ja">言語</span
+            ><span class="ft-en">LANGUAGE</span></span
+          ></a
+        >
+        <a
+          href="#stack"
+          class="hover:text-white text-gray-400 transition-colors"
+          ><span class="ft"
+            ><span class="ft-ja">技術</span
+            ><span class="ft-en">TECH</span></span
+          ></a
+        >
+        <a
+          href="#projects"
+          class="hover:text-white text-gray-400 transition-colors"
+          ><span class="ft"
+            ><span class="ft-ja">作品</span
+            ><span class="ft-en">PROJECTS</span></span
+          ></a
+        >
+      </nav>
+      <a
+        href="https://github.com/Studio-Hujan"
+        target="_blank"
+        class="tag tag-inv text-xs"
+        >AME STUDIO ↗</a
+      >
+    </header>
 
-  <!-- ══ NAV ══ -->
-  <header class="brutalist-box border-l-0 border-r-0 border-t-0 flex items-center justify-between px-6 py-3 sticky top-0 z-50 bg-black bg-opacity-95 backdrop-blur-sm">
-    <span class="font-mono text-sm tracking-widest uppercase text-gray-400">
-      <span class="ft"><span class="ft-ja">明日香：//ポートフォリオ</span><span class="ft-en">azuka://portfolio</span></span>
-    </span>
-    <nav class="hidden md:flex gap-6 text-xs tracking-widest">
-      <a href="#about"    class="hover:text-white text-gray-400 transition-colors"><span class="ft"><span class="ft-ja">自己紹介</span><span class="ft-en">ABOUT</span></span></a>
-      <a href="#skills"   class="hover:text-white text-gray-400 transition-colors"><span class="ft"><span class="ft-ja">スキル</span><span class="ft-en">SKILLS</span></span></a>
-      <a href="#langs"    class="hover:text-white text-gray-400 transition-colors"><span class="ft"><span class="ft-ja">言語</span><span class="ft-en">LANGUAGE</span></span></a>
-      <a href="#stack"    class="hover:text-white text-gray-400 transition-colors"><span class="ft"><span class="ft-ja">技術</span><span class="ft-en">TECH</span></span></a>
-      <a href="#projects" class="hover:text-white text-gray-400 transition-colors"><span class="ft"><span class="ft-ja">作品</span><span class="ft-en">PROJECTS</span></span></a>
-    </nav>
-    <a href="https://github.com/Azelzy" target="_blank" class="tag tag-inv text-xs">GitHub ↗</a>
-  </header>
-
-  <!-- ══ TICKER ══ -->
-  <div class="ticker-wrap py-1">
-    <div class="ticker-inner">
-      <span>高山アズカ</span><span>✦</span><span>LINUX RICER</span><span>✦</span>
-      <span>AME STUDIO</span><span>✦</span><span>フルスタック開発者</span><span>✦</span>
-      <span>ゲーム開発</span><span>✦</span><span>FLUTTER ✦ REACT ✦ LARAVEL</span><span>✦</span>
-      <span>日本語 ✦ ENGLISH ✦ INDO ✦ JAWA</span><span>✦</span>
-    </div>
-  </div>
-
-  <!-- ══ HERO ══ -->
-  <section id="about" class="min-h-[90vh] flex flex-col justify-center px-6 md:px-12 pt-16 pb-8 relative">
-    <div class="absolute top-0 right-0 w-px h-full bg-white opacity-10"></div>
-    <div class="absolute top-1/2 left-0 w-full h-px bg-white opacity-5"></div>
-
-    <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <p class="text-xs tracking-widest text-gray-500 mb-4 uppercase">
-          <span class="ft"><span class="ft-ja">github.com/Studio-Hujan</span><span class="ft-en">github.com/Studio-Hujan</span></span>
-        </p>
-
-        <div class="hero-wrap">
-          <div class="hero-ja glitch" data-text="明日香">明日香</div>
-          <div class="hero-en">AZELZY</div>
-        </div>
-        <!-- ↓ mt-10 gives the requested extra gap below the hero name area -->
-        <div class="mt-10 max-w-md">
-          <div class="ft-block" style="min-height:8rem">
-            <p class="ft-ja" style="font-family:'Noto Sans JP',sans-serif;font-size:.85rem;line-height:1.9;color:#b0b0a8">
-              架空のキャラクター魂を持つ開発者 ——<strong style="color:#f5f5f0">高山アズカ</strong>、<strong style="color:#f5f5f0">AME STUDIO</strong>のメンバー。ウェブ、モバイル、ゲームエンジンまで幅広く開発するLinuxリッサー見習い。ターミナルとコードの間で生きている。
-            </p>
-            <p class="ft-en" style="font-size:.85rem;line-height:1.9;color:#b0b0a8">
-              HI! I'm — <strong style="color:#f5f5f0">Azuka Takayama</strong>, founder of <strong style="color:#f5f5f0">AME STUDIO</strong>. A linux ricer wannabe, expert at web, mobile &amp; currently lurking on game dev. powershell nerd.
-            </p>
-          </div>
-        </div>
-
-        <p class="mt-6 text-gray-500 text-xs font-mono">
-          &gt; <span style="color:#f5f5f0">cat /home/asuka/.motto</span><br/>
-          <span class="ml-3">
-            <span class="ft"><span class="ft-ja">"作れ。壊せ。また作れ。"</span><span class="ft-en">"build. break. rebuild."</span></span>
-          </span>
-          <span class="blink" style="color:#f5f5f0">_</span>
-        </p>
+    <!-- ══ TICKER ══ -->
+    <div class="ticker-wrap py-1">
+      <div class="ticker-inner">
+        <span>高山アズカ</span><span>✦</span><span>LINUX RICER</span
+        ><span>✦</span> <span>AME STUDIO</span><span>✦</span
+        ><span>フルスタック開発者</span><span>✦</span> <span>ゲーム開発</span
+        ><span>✦</span><span>FLUTTER ✦ REACT ✦ LARAVEL</span><span>✦</span>
+        <span>日本語 ✦ ENGLISH ✦ INDO ✦ JAWA</span><span>✦</span>
       </div>
-
-      <!-- RIGHT: profile pic -->
-      <div class="brutalist-box profile-box card-hover fade-up" style="height:440px">
-        <img src="shion.jpg" alt="Azelzy — Azuka Takayama" loading="lazy" />
-        <div class="pic-overlay"></div>
-        <div class="pic-label">
-          <p class="text-xs tracking-widest text-gray-400 font-mono mb-2">// https://github.com/Studio-Hujan</p>
-          <div class="flex gap-2 flex-wrap">
-            <span class="tag text-xs">38 Repos</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ LANGUAGE SKILLS ══ -->
-  <section id="langs" class="px-6 md:px-12 py-16 max-w-7xl mx-auto">
-    <div class="section-label mb-10 fade-up">
-      <span class="ft flex flex-col items-start relative z-10"><span class="ft-ja">言語スキル</span><span class="ft-en">LANGUAGE SKILLS</span></span>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
-
-      <!-- JP -->
-      <div class="lang-card brutalist-box border-r-0 p-6 fade-up">
-        <div class="lang-content">
-          <p class="text-3xl mb-3">🇯🇵</p>
-          <div class="lang-name-flip">
-            <span class="ft-ja">日本語</span>
-            <span class="ft-en">JAPANESE</span>
-          </div>
-          <div class="lang-level-flip">
-            <span class="ft-ja">中級</span>
-            <span class="ft-en">Intermediate</span>
-          </div>
-          <div class="mt-4 skill-bar-track"><div class="skill-bar-fill" data-width="55"></div></div>
-          <p class="text-xs mt-2 text-gray-500">55%</p>
-        </div>
-      </div>
-
-      <!-- EN -->
-      <div class="lang-card brutalist-box border-r-0 p-6 fade-up">
-        <div class="lang-content">
-          <p class="text-3xl mb-3">🇬🇧</p>
-          <div class="lang-name-flip">
-            <span class="ft-ja">英語</span>
-            <span class="ft-en">ENGLISH</span>
-          </div>
-          <div class="lang-level-flip">
-            <span class="ft-ja">上級</span>
-            <span class="ft-en">Proficient</span>
-          </div>
-          <div class="mt-4 skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
-          <p class="text-xs mt-2 text-gray-500">82%</p>
-        </div>
-      </div>
-
-      <!-- ID -->
-      <div class="lang-card brutalist-box border-r-0 p-6 fade-up">
-        <div class="lang-content">
-          <p class="text-3xl mb-3">🇮🇩</p>
-          <div class="lang-name-flip">
-            <span class="ft-ja">インドネシア語</span>
-            <span class="ft-en">INDONESIAN</span>
-          </div>
-          <div class="lang-level-flip">
-            <span class="ft-ja">母国語</span>
-            <span class="ft-en">Native</span>
-          </div>
-          <div class="mt-4 skill-bar-track"><div class="skill-bar-fill" data-width="100"></div></div>
-          <p class="text-xs mt-2 text-gray-500">100%</p>
-        </div>
-      </div>
-
-      <!-- JW -->
-      <div class="lang-card brutalist-box p-6 fade-up">
-        <div class="lang-content">
-          <p class="text-3xl mb-3">🇯🇦🇼🇦</p>
-          <div class="lang-name-flip">
-            <span class="ft-ja">ジャワ語</span>
-            <span class="ft-en">JAVANESE</span>
-          </div>
-          <div class="lang-level-flip">
-            <span class="ft-ja">母国語</span>
-            <span class="ft-en">Native / Fluent</span>
-          </div>
-          <div class="mt-4 skill-bar-track"><div class="skill-bar-fill" data-width="100"></div></div>
-          <p class="text-xs mt-2 text-gray-500">100%</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══ PROGRAMMING SKILLS ══ -->
-  <section id="skills" class="px-6 md:px-12 py-16 max-w-7xl mx-auto">
-    <div class="section-label mb-10 fade-up">
-      <span class="ft"><span class="ft-ja">プログラミングスキル</span><span class="ft-en">PROGRAMMING SKILLS</span></span>
-    </div>
-    <div class="grid md:grid-cols-2 gap-8">
-      <div class="fade-up">
-        <p class="text-xs tracking-widest text-gray-500 uppercase mb-5">
-          <span class="ft"><span class="ft-ja">// プログラミング言語</span><span class="ft-en">// Languages</span></span>
-        </p>
-        <div class="space-y-5">
-          <div><div class="flex justify-between mb-1"><span class="text-sm">JS / TypeScript</span><span class="text-xs text-gray-500">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Dart (Flutter)</span><span class="text-xs text-gray-500">82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">PHP</span><span class="text-xs text-gray-500">78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Python</span><span class="text-xs text-gray-500">70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">C / C++ / C#</span><span class="text-xs text-gray-500">60%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="60"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Kotlin / Java</span><span class="text-xs text-gray-500">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
-        </div>
-      </div>
-      <div class="fade-up">
-        <p class="text-xs tracking-widest text-gray-500 uppercase mb-5">
-          <span class="ft"><span class="ft-ja">// フレームワーク・ツール</span><span class="ft-en">// Frameworks &amp; Tools</span></span>
-        </p>
-        <div class="space-y-5">
-          <div><div class="flex justify-between mb-1"><span class="text-sm">React / Next.js</span><span class="text-xs text-gray-500">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Laravel / Blade</span><span class="text-xs text-gray-500">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Vue.js</span><span class="text-xs text-gray-500">72%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="72"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Node.js / Express</span><span class="text-xs text-gray-500">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Unity / Unreal / Godot</span><span class="text-xs text-gray-500">50%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="50"></div></div></div>
-          <div><div class="flex justify-between mb-1"><span class="text-sm">Figma / Canva / Framer</span><span class="text-xs text-gray-500">80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ TECH MARQUEE ══ -->
-  <section id="stack" class="py-10 border-t-2 border-b-2 border-white">
-    <p class="text-xs tracking-widest text-center text-gray-500 uppercase mb-4">
-      <span class="ft">
-        <span class="ft-ja">//技術スタック</span>
-      <span class="ft-en">//TechStack</span>
-    </span>
-    </p>
-    <div class="tech-marquee">
-      <div class="tech-inner">
-        <span class="tag">C</span><span class="tag">C#</span><span class="tag">C++</span><span class="tag">Java</span>
-        <span class="tag">JS</span><span class="tag">TypeScript</span><span class="tag">Python</span>
-        <span class="tag">PHP</span><span class="tag">Dart</span><span class="tag">Kotlin</span>
-        <span class="tag tag-inv">HTML5</span><span class="tag tag-inv">CSS3</span>
-        <span class="tag tag-inv">TailwindCSS</span><span class="tag tag-inv">React</span>
-        <span class="tag tag-inv">Next.js</span><span class="tag tag-inv">Vue.js</span>
-        <span class="tag tag-inv">Laravel</span><span class="tag tag-inv">Node.js</span>
-        <span class="tag tag-inv">Express</span><span class="tag tag-inv">Flutter</span>
-        <span class="tag">React Native</span><span class="tag">Unity</span>
-        <span class="tag">Unreal</span><span class="tag">Godot</span>
-        <span class="tag">MySQL</span><span class="tag">MongoDB</span>
-        <span class="tag">SQL Server</span><span class="tag">MariaDB</span>
-        <span class="tag">Figma</span><span class="tag">Canva</span><span class="tag">Framer</span>
-        <!-- dup -->
-        <span class="tag">C</span><span class="tag">C#</span><span class="tag">C++</span><span class="tag">Java</span>
-        <span class="tag">JS</span><span class="tag">TypeScript</span><span class="tag">Python</span>
-        <span class="tag">PHP</span><span class="tag">Dart</span><span class="tag">Kotlin</span>
-        <span class="tag tag-inv">HTML5</span><span class="tag tag-inv">CSS3</span>
-        <span class="tag tag-inv">TailwindCSS</span><span class="tag tag-inv">React</span>
-        <span class="tag tag-inv">Next.js</span><span class="tag tag-inv">Vue.js</span>
-        <span class="tag tag-inv">Laravel</span><span class="tag tag-inv">Node.js</span>
-        <span class="tag tag-inv">Express</span><span class="tag tag-inv">Flutter</span>
-        <span class="tag">React Native</span><span class="tag">Unity</span>
-        <span class="tag">Unreal</span><span class="tag">Godot</span>
-        <span class="tag">MySQL</span><span class="tag">MongoDB</span>
-        <span class="tag">SQL Server</span><span class="tag">MariaDB</span>
-        <span class="tag">Figma</span><span class="tag">Canva</span><span class="tag">Framer</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ PINNED PROJECTS ══ -->
-  <section id="projects" class="px-6 md:px-12 py-16 max-w-7xl mx-auto">
-    <div class="section-label mb-10 fade-up">
-      <span class="ft"><span class="ft-ja">ピン留めプロジェクト</span><span class="ft-en">PINNED PROJECTS</span></span>
-    </div>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-0">
-
-      <a href="https://github.com/Azelzy/PROJEK_KOLLAB_FLUTTER_06_17" target="_blank"
-         class="brutalist-box border-r-0 border-b-0 p-5 card-hover fade-up block group">
-        <div class="flex justify-between items-start mb-3">
-          <span class="tag">Dart / Flutter</span>
-          <span class="text-gray-600 group-hover:text-white transition-colors text-lg">↗</span>
-        </div>
-        <h3 class="font-mono font-bold text-sm mb-2 leading-snug">PROJEK_KOLLAB_FLUTTER_06_17</h3>
-        <div class="ft-block" style="min-height:2.5rem">
-          <p class="ft-ja text-xs text-gray-500">Flutterコラボプロジェクト。モバイルアプリ開発。</p>
-          <p class="ft-en text-xs text-gray-500">Collaborative Flutter project. Mobile app with Dart.</p>
-        </div>
-        <p class="text-xs text-gray-700 mt-3">★ 1</p>
-      </a>
-
-      <a href="https://github.com/Azelzy/crudfirestoreandpaymentgateway" target="_blank"
-         class="brutalist-box border-r-0 border-b-0 p-5 card-hover fade-up block group">
-        <div class="flex justify-between items-start mb-3">
-          <span class="tag">Dart / Flutter</span>
-          <span class="text-gray-600 group-hover:text-white transition-colors text-lg">↗</span>
-        </div>
-        <h3 class="font-mono font-bold text-sm mb-2 leading-snug">crudfirestoreandpaymentgateway</h3>
-        <div class="ft-block" style="min-height:2.5rem">
-          <p class="ft-ja text-xs text-gray-500">FirestoreのCRUDと決済ゲートウェイの統合。</p>
-          <p class="ft-en text-xs text-gray-500">CRUD Firestore + Payment Gateway with Flutter.</p>
-        </div>
-      </a>
-
-      <a href="https://github.com/Azelzy/JAKARTA-CITY-ROLEPLAY-WEBSITE" target="_blank"
-         class="brutalist-box border-b-0 p-5 card-hover fade-up block group">
-        <div class="flex justify-between items-start mb-3">
-          <span class="tag">JavaScript</span>
-          <span class="text-gray-600 group-hover:text-white transition-colors text-lg">↗</span>
-        </div>
-        <h3 class="font-mono font-bold text-sm mb-2 leading-snug">JAKARTA-CITY-ROLEPLAY-WEBSITE</h3>
-        <div class="ft-block" style="min-height:2.5rem">
-          <p class="ft-ja text-xs text-gray-500">ジャカルタRPコミュニティのウェブサイト。</p>
-          <p class="ft-en text-xs text-gray-500">Website for Jakarta City roleplay community.</p>
-        </div>
-      </a>
-
-      <a href="https://github.com/Azelzy/laravel-first" target="_blank"
-         class="brutalist-box border-r-0 p-5 card-hover fade-up block group">
-        <div class="flex justify-between items-start mb-3">
-          <span class="tag">Laravel / Blade</span>
-          <span class="text-gray-600 group-hover:text-white transition-colors text-lg">↗</span>
-        </div>
-        <h3 class="font-mono font-bold text-sm mb-2 leading-snug">laravel-first</h3>
-        <div class="ft-block" style="min-height:2.5rem">
-          <p class="ft-ja text-xs text-gray-500">学校管理システム — クライアントビュー＋管理者パネル。</p>
-          <p class="ft-en text-xs text-gray-500">School management system — client + admin panel.</p>
-        </div>
-      </a>
-
-      <a href="https://github.com/Azelzy/pasmobile11pplg1_06" target="_blank"
-         class="brutalist-box border-r-0 p-5 card-hover fade-up block group">
-        <div class="flex justify-between items-start mb-3">
-          <span class="tag">Dart / Flutter</span>
-          <span class="text-gray-600 group-hover:text-white transition-colors text-lg">↗</span>
-        </div>
-        <h3 class="font-mono font-bold text-sm mb-2 leading-snug">pasmobile11pplg1_06</h3>
-        <div class="ft-block" style="min-height:2.5rem">
-          <p class="ft-ja text-xs text-gray-500">学校のFlutterモバイル課題。</p>
-          <p class="ft-en text-xs text-gray-500">Flutter school mobile assignment.</p>
-        </div>
-      </a>
-
-      <a href="https://github.com/Azelzy/SISTEM-PAJAK-ROLEPLAY" target="_blank"
-         class="brutalist-box p-5 card-hover fade-up block group">
-        <div class="flex justify-between items-start mb-3">
-          <span class="tag">JavaScript</span>
-          <span class="text-gray-600 group-hover:text-white transition-colors text-lg">↗</span>
-        </div>
-        <h3 class="font-mono font-bold text-sm mb-2 leading-snug">SISTEM-PAJAK-ROLEPLAY</h3>
-        <div class="ft-block" style="min-height:2.5rem">
-          <p class="ft-ja text-xs text-gray-500">RPコミュニティ向け税管理システム。</p>
-          <p class="ft-en text-xs text-gray-500">Tax management for a roleplay community.</p>
-        </div>
-      </a>
     </div>
 
-    <div class="mt-8 text-center fade-up">
-      <a href="https://github.com/Azelzy?tab=repositories" target="_blank"
-         class="brutalist-box inline-block px-8 py-3 text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-colors font-mono">
-        <span class="ft"><span class="ft-ja">全38リポジトリを見る ↗</span><span class="ft-en">View All 38 Repos ↗</span></span>
-      </a>
-    </div>
-  </section>
+    <!-- ══ HERO ══ -->
+<section id="about" class="min-h-[90vh] flex flex-col justify-center px-6 md:px-12 pt-16 pb-8 relative">
+  <div class="absolute top-0 right-0 w-px h-full bg-white opacity-10"></div>
+  <div class="absolute top-1/2 left-0 w-full h-px bg-white opacity-5"></div>
 
-  <!-- ══ FOOTER ══ -->
-  <!-- bg-black bg-opacity-95 = sama dengan navbar -->
-  <footer class="border-t-2 border-white px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4 bg-black bg-opacity-95">
+  <div class="max-w-7xl mx-auto w-full grid md:grid-cols-2 gap-10 items-center">
     <div>
-      <p class="font-mono text-xs text-gray-600">© 2026 — 高山アズカ / Azelzy</p>
-      <p class="font-mono text-xs text-gray-700 mt-1">
-        <span class="ft"><span class="ft-ja">ブルータリストな愛とコーヒーで作られた</span><span class="ft-en">built with brutalist love &amp; too much coffee</span></span>
+      <p class="text-xs tracking-widest text-gray-500 mb-4 uppercase">
+        <span class="ft">
+          <span class="ft-ja">github.com/Studio-Hujan</span>
+          <span class="ft-en">github.com/Studio-Hujan</span>
+        </span>
+      </p>
+
+      <div class="hero-wrap">
+        <div class="hero-ja glitch" data-text="明日香">明日香</div>
+        <div class="hero-en">AZELZY</div>
+      </div>
+
+      <div class="mt-10 max-w-md">
+        <div class="ft-block" style="min-height: 8rem">
+          <p class="ft-ja" style="font-family: 'Noto Sans JP', sans-serif; font-size: 0.85rem; line-height: 1.9; color: #b0b0a8;">
+            架空のキャラクター魂を持つ開発者 ——<strong style="color: #f5f5f0">高山アズカ</strong>、<strong style="color: #f5f5f0">AME STUDIO</strong>のメンバー。ウェブ、モバイル、ゲームエンジンまで幅広く開発するLinuxリッサー見習い。ターミナルとコードの間で生きている。
+          </p>
+          <p class="ft-en" style="font-size: 0.85rem; line-height: 1.9; color: #b0b0a8">
+            HI! I'm — <strong style="color: #f5f5f0">Azuka Takayama</strong>, founder of <strong style="color: #f5f5f0">AME STUDIO</strong>. A linux ricer wannabe, expert at web, mobile &amp; currently lurking on game dev. powershell nerd.
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-6 text-gray-500 text-xs font-mono">
+        &gt; <span style="color: #f5f5f0">cat /home/asuka/.motto</span><br />
+        <span class="ml-3">
+          <span class="ft">
+            <span class="ft-ja">"作れ。壊せ。また作れ。"</span>
+            <span class="ft-en">"build. break. rebuild."</span>
+          </span>
+        </span>
+        <span class="blink" style="color: #f5f5f0">_</span>
       </p>
     </div>
-    <a href="https://github.com/Azelzy" target="_blank" class="tag hover:tag-inv transition-all text-xs">GitHub</a>
-  </footer>
 
-  <script>
-    // ── Custom cursor ──
-    const cursor = document.getElementById('custom-cursor');
+    <a href="https://github.com/Azelzy" target="_blank" class="brutalist-box profile-box card-hover fade-up block relative" style="height:440px">
+      <img src="shion.jpg" alt="Azelzy — Azuka Takayama" loading="lazy" />
+      <div class="pic-overlay"></div>
+      <div class="pic-label">
+        <p class="text-xs tracking-widest text-gray-400 font-mono mb-2">// https://github.com/Azelzy</p>
+        <div class="flex gap-2 flex-wrap">
+          <span class="tag text-xs">38 Repos</span>
+        </div>
+      </div>
+    </a>
+  </div> </section>
 
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top  = e.clientY + 'px';
-    });
+    <!-- ══ LANGUAGE SKILLS ══ -->
+    <section id="langs" class="px-6 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="section-label mb-10 fade-up">
+        <span class="ft flex flex-col items-start relative z-10"
+          ><span class="ft-ja">言語スキル</span
+          ><span class="ft-en">LANGUAGE SKILLS</span></span
+        >
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-0">
+        <!-- JP -->
+        <div class="lang-card brutalist-box border-r-0 p-6 fade-up">
+          <div class="lang-content">
+            <p class="text-3xl mb-3">🇯🇵</p>
+            <div class="lang-name-flip">
+              <span class="ft-ja">日本語</span>
+              <span class="ft-en">JAPANESE</span>
+            </div>
+            <div class="lang-level-flip">
+              <span class="ft-ja">中級</span>
+              <span class="ft-en">Intermediate</span>
+            </div>
+            <div class="mt-4 skill-bar-track">
+              <div class="skill-bar-fill" data-width="55"></div>
+            </div>
+            <p class="text-xs mt-2 text-gray-500">55%</p>
+          </div>
+        </div>
 
-    document.querySelectorAll('a, button, .card-hover, .lang-card, .tag, .brutalist-box, .ft, .ft-block, .hero-wrap')
-      .forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('expanded'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('expanded'));
+        <!-- EN -->
+        <div class="lang-card brutalist-box border-r-0 p-6 fade-up">
+          <div class="lang-content">
+            <p class="text-3xl mb-3">🇬🇧</p>
+            <div class="lang-name-flip">
+              <span class="ft-ja">英語</span>
+              <span class="ft-en">ENGLISH</span>
+            </div>
+            <div class="lang-level-flip">
+              <span class="ft-ja">上級</span>
+              <span class="ft-en">Proficient</span>
+            </div>
+            <div class="mt-4 skill-bar-track">
+              <div class="skill-bar-fill" data-width="82"></div>
+            </div>
+            <p class="text-xs mt-2 text-gray-500">82%</p>
+          </div>
+        </div>
+
+        <!-- ID -->
+        <div class="lang-card brutalist-box border-r-0 p-6 fade-up">
+          <div class="lang-content">
+            <p class="text-3xl mb-3">🇮🇩</p>
+            <div class="lang-name-flip">
+              <span class="ft-ja">インドネシア語</span>
+              <span class="ft-en">INDONESIAN</span>
+            </div>
+            <div class="lang-level-flip">
+              <span class="ft-ja">母国語</span>
+              <span class="ft-en">Native</span>
+            </div>
+            <div class="mt-4 skill-bar-track">
+              <div class="skill-bar-fill" data-width="100"></div>
+            </div>
+            <p class="text-xs mt-2 text-gray-500">100%</p>
+          </div>
+        </div>
+
+        <!-- JW -->
+        <div class="lang-card brutalist-box p-6 fade-up">
+          <div class="lang-content">
+            <p class="text-3xl mb-3">🇯🇦🇼🇦</p>
+            <div class="lang-name-flip">
+              <span class="ft-ja">ジャワ語</span>
+              <span class="ft-en">JAVANESE</span>
+            </div>
+            <div class="lang-level-flip">
+              <span class="ft-ja">母国語</span>
+              <span class="ft-en">Native / Fluent</span>
+            </div>
+            <div class="mt-4 skill-bar-track">
+              <div class="skill-bar-fill" data-width="100"></div>
+            </div>
+            <p class="text-xs mt-2 text-gray-500">100%</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ PROGRAMMING SKILLS ══ -->
+    <section id="skills" class="px-6 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="section-label mb-10 fade-up">
+        <span class="ft"
+          ><span class="ft-ja">プログラミングスキル</span
+          ><span class="ft-en">PROGRAMMING SKILLS</span></span
+        >
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="fade-up">
+          <p class="text-xs tracking-widest text-gray-500 uppercase mb-5">
+            <span class="ft"
+              ><span class="ft-ja">// プログラミング言語</span
+              ><span class="ft-en">// Languages</span></span
+            >
+          </p>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">JS / TypeScript</span
+                ><span class="text-xs text-gray-500">88%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="88"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Dart (Flutter)</span
+                ><span class="text-xs text-gray-500">82%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="82"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">PHP</span
+                ><span class="text-xs text-gray-500">78%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="78"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Python</span
+                ><span class="text-xs text-gray-500">70%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="70"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">C / C++ / C#</span
+                ><span class="text-xs text-gray-500">60%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="60"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Kotlin / Java</span
+                ><span class="text-xs text-gray-500">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fade-up">
+          <p class="text-xs tracking-widest text-gray-500 uppercase mb-5">
+            <span class="ft"
+              ><span class="ft-ja">// フレームワーク・ツール</span
+              ><span class="ft-en">// Frameworks &amp; Tools</span></span
+            >
+          </p>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">React / Next.js</span
+                ><span class="text-xs text-gray-500">85%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="85"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Laravel / Blade</span
+                ><span class="text-xs text-gray-500">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="80"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Vue.js</span
+                ><span class="text-xs text-gray-500">72%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="72"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Node.js / Express</span
+                ><span class="text-xs text-gray-500">75%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="75"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Unity / Unreal / Godot</span
+                ><span class="text-xs text-gray-500">50%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="50"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1">
+                <span class="text-sm">Figma / Canva / Framer</span
+                ><span class="text-xs text-gray-500">80%</span>
+              </div>
+              <div class="skill-bar-track">
+                <div class="skill-bar-fill" data-width="80"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ TECH MARQUEE ══ -->
+    <section id="stack" class="py-10 border-t-2 border-b-2 border-white">
+      <p
+        class="text-xs tracking-widest text-center text-gray-500 uppercase mb-4"
+      >
+        <span class="ft">
+          <span class="ft-ja">//技術スタック</span>
+          <span class="ft-en">//TechStack</span>
+        </span>
+      </p>
+      <div class="tech-marquee">
+        <div class="tech-inner">
+          <span class="tag">C</span><span class="tag">C#</span
+          ><span class="tag">C++</span><span class="tag">Java</span>
+          <span class="tag">JS</span><span class="tag">TypeScript</span
+          ><span class="tag">Python</span> <span class="tag">PHP</span
+          ><span class="tag">Dart</span><span class="tag">Kotlin</span>
+          <span class="tag tag-inv">HTML5</span
+          ><span class="tag tag-inv">CSS3</span>
+          <span class="tag tag-inv">TailwindCSS</span
+          ><span class="tag tag-inv">React</span>
+          <span class="tag tag-inv">Next.js</span
+          ><span class="tag tag-inv">Vue.js</span>
+          <span class="tag tag-inv">Laravel</span
+          ><span class="tag tag-inv">Node.js</span>
+          <span class="tag tag-inv">Express</span
+          ><span class="tag tag-inv">Flutter</span>
+          <span class="tag">React Native</span><span class="tag">Unity</span>
+          <span class="tag">Unreal</span><span class="tag">Godot</span>
+          <span class="tag">MySQL</span><span class="tag">MongoDB</span>
+          <span class="tag">SQL Server</span><span class="tag">MariaDB</span>
+          <span class="tag">Figma</span><span class="tag">Canva</span
+          ><span class="tag">Framer</span>
+          <!-- dup -->
+          <span class="tag">C</span><span class="tag">C#</span
+          ><span class="tag">C++</span><span class="tag">Java</span>
+          <span class="tag">JS</span><span class="tag">TypeScript</span
+          ><span class="tag">Python</span> <span class="tag">PHP</span
+          ><span class="tag">Dart</span><span class="tag">Kotlin</span>
+          <span class="tag tag-inv">HTML5</span
+          ><span class="tag tag-inv">CSS3</span>
+          <span class="tag tag-inv">TailwindCSS</span
+          ><span class="tag tag-inv">React</span>
+          <span class="tag tag-inv">Next.js</span
+          ><span class="tag tag-inv">Vue.js</span>
+          <span class="tag tag-inv">Laravel</span
+          ><span class="tag tag-inv">Node.js</span>
+          <span class="tag tag-inv">Express</span
+          ><span class="tag tag-inv">Flutter</span>
+          <span class="tag">React Native</span><span class="tag">Unity</span>
+          <span class="tag">Unreal</span><span class="tag">Godot</span>
+          <span class="tag">MySQL</span><span class="tag">MongoDB</span>
+          <span class="tag">SQL Server</span><span class="tag">MariaDB</span>
+          <span class="tag">Figma</span><span class="tag">Canva</span
+          ><span class="tag">Framer</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ PINNED PROJECTS ══ -->
+    <section id="projects" class="px-6 md:px-12 py-16 max-w-7xl mx-auto">
+      <div class="section-label mb-10 fade-up">
+        <span class="ft"
+          ><span class="ft-ja">ピン留めプロジェクト</span
+          ><span class="ft-en">PINNED PROJECTS</span></span
+        >
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-0">
+        <a
+          href="https://github.com/Azelzy/PROJEK_KOLLAB_FLUTTER_06_17"
+          target="_blank"
+          class="brutalist-box border-r-0 border-b-0 p-5 card-hover fade-up block group"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <span class="tag">Dart / Flutter</span>
+            <span
+              class="text-gray-600 group-hover:text-white transition-colors text-lg"
+              >↗</span
+            >
+          </div>
+          <h3 class="font-mono font-bold text-sm mb-2 leading-snug">
+            PROJEK_KOLLAB_FLUTTER_06_17
+          </h3>
+          <div class="ft-block" style="min-height: 2.5rem">
+            <p class="ft-ja text-xs text-gray-500">
+              Flutterコラボプロジェクト。モバイルアプリ開発。
+            </p>
+            <p class="ft-en text-xs text-gray-500">
+              Collaborative Flutter project. Mobile app with Dart.
+            </p>
+          </div>
+          <p class="text-xs text-gray-700 mt-3">★ 1</p>
+        </a>
+
+        <a
+          href="https://github.com/Azelzy/crudfirestoreandpaymentgateway"
+          target="_blank"
+          class="brutalist-box border-r-0 border-b-0 p-5 card-hover fade-up block group"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <span class="tag">Dart / Flutter</span>
+            <span
+              class="text-gray-600 group-hover:text-white transition-colors text-lg"
+              >↗</span
+            >
+          </div>
+          <h3 class="font-mono font-bold text-sm mb-2 leading-snug">
+            crudfirestoreandpaymentgateway
+          </h3>
+          <div class="ft-block" style="min-height: 2.5rem">
+            <p class="ft-ja text-xs text-gray-500">
+              FirestoreのCRUDと決済ゲートウェイの統合。
+            </p>
+            <p class="ft-en text-xs text-gray-500">
+              CRUD Firestore + Payment Gateway with Flutter.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="https://github.com/Azelzy/JAKARTA-CITY-ROLEPLAY-WEBSITE"
+          target="_blank"
+          class="brutalist-box border-b-0 p-5 card-hover fade-up block group"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <span class="tag">JavaScript</span>
+            <span
+              class="text-gray-600 group-hover:text-white transition-colors text-lg"
+              >↗</span
+            >
+          </div>
+          <h3 class="font-mono font-bold text-sm mb-2 leading-snug">
+            JAKARTA-CITY-ROLEPLAY-WEBSITE
+          </h3>
+          <div class="ft-block" style="min-height: 2.5rem">
+            <p class="ft-ja text-xs text-gray-500">
+              ジャカルタRPコミュニティのウェブサイト。
+            </p>
+            <p class="ft-en text-xs text-gray-500">
+              Website for Jakarta City roleplay community.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="https://github.com/Azelzy/laravel-first"
+          target="_blank"
+          class="brutalist-box border-r-0 p-5 card-hover fade-up block group"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <span class="tag">Laravel / Blade</span>
+            <span
+              class="text-gray-600 group-hover:text-white transition-colors text-lg"
+              >↗</span
+            >
+          </div>
+          <h3 class="font-mono font-bold text-sm mb-2 leading-snug">
+            laravel-first
+          </h3>
+          <div class="ft-block" style="min-height: 2.5rem">
+            <p class="ft-ja text-xs text-gray-500">
+              学校管理システム — クライアントビュー＋管理者パネル。
+            </p>
+            <p class="ft-en text-xs text-gray-500">
+              School management system — client + admin panel.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="https://github.com/Azelzy/pasmobile11pplg1_06"
+          target="_blank"
+          class="brutalist-box border-r-0 p-5 card-hover fade-up block group"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <span class="tag">Dart / Flutter</span>
+            <span
+              class="text-gray-600 group-hover:text-white transition-colors text-lg"
+              >↗</span
+            >
+          </div>
+          <h3 class="font-mono font-bold text-sm mb-2 leading-snug">
+            pasmobile11pplg1_06
+          </h3>
+          <div class="ft-block" style="min-height: 2.5rem">
+            <p class="ft-ja text-xs text-gray-500">
+              学校のFlutterモバイル課題。
+            </p>
+            <p class="ft-en text-xs text-gray-500">
+              Flutter school mobile assignment.
+            </p>
+          </div>
+        </a>
+
+        <a
+          href="https://github.com/Azelzy/SISTEM-PAJAK-ROLEPLAY"
+          target="_blank"
+          class="brutalist-box p-5 card-hover fade-up block group"
+        >
+          <div class="flex justify-between items-start mb-3">
+            <span class="tag">JavaScript</span>
+            <span
+              class="text-gray-600 group-hover:text-white transition-colors text-lg"
+              >↗</span
+            >
+          </div>
+          <h3 class="font-mono font-bold text-sm mb-2 leading-snug">
+            SISTEM-PAJAK-ROLEPLAY
+          </h3>
+          <div class="ft-block" style="min-height: 2.5rem">
+            <p class="ft-ja text-xs text-gray-500">
+              RPコミュニティ向け税管理システム。
+            </p>
+            <p class="ft-en text-xs text-gray-500">
+              Tax management for a roleplay community.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="mt-8 text-center fade-up">
+        <a
+          href="https://github.com/Azelzy?tab=repositories"
+          target="_blank"
+          class="brutalist-box inline-block px-8 py-3 text-sm tracking-widest uppercase hover:bg-white hover:text-black transition-colors font-mono"
+        >
+          <span class="ft"
+            ><span class="ft-ja">全38リポジトリを見る ↗</span
+            ><span class="ft-en">View All 38 Repos ↗</span></span
+          >
+        </a>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <!-- bg-black bg-opacity-95 = sama dengan navbar -->
+    <footer
+      class="border-t-2 border-white px-6 md:px-12 py-8 flex flex-col md:flex-row items-center justify-between gap-4 bg-black bg-opacity-95"
+    >
+      <div>
+        <p class="font-mono text-xs text-gray-600">
+          © 2026 — 高山アズカ / Azelzy
+        </p>
+        <p class="font-mono text-xs text-gray-700 mt-1">
+          <span class="ft"
+            ><span class="ft-ja">ブルータリストな愛とコーヒーで作られた</span
+            ><span class="ft-en"
+              >ambatukam</span
+            ></span
+          >
+        </p>
+      </div>
+      <a href="#about" class="tag hover:tag-inv transition-all text-xs">
+        <span class="ft"
+          ><span class="ft-ja">トップに戻る</span
+          ><span class="ft-en">To Top ↑ </span>
+        </span
+        >
+      </a>
+    </footer>
+
+    <script>
+      // ── Custom cursor ──
+      const cursor = document.getElementById("custom-cursor");
+
+      document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
       });
 
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-      cursor.style.display = 'none';
-    }
+      document
+        .querySelectorAll(
+          "a, button, .card-hover, .lang-card, .tag, .brutalist-box, .ft, .ft-block, .hero-wrap",
+        )
+        .forEach((el) => {
+          el.addEventListener("mouseenter", () =>
+            cursor.classList.add("expanded"),
+          );
+          el.addEventListener("mouseleave", () =>
+            cursor.classList.remove("expanded"),
+          );
+        });
 
-    // ── Intersection Observer: fade-up + skill bars ──
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
-            const w = bar.getAttribute('data-width');
-            if (w) bar.style.width = w + '%';
+      if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+        cursor.style.display = "none";
+      }
+
+      // ── Intersection Observer: fade-up + skill bars ──
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("visible");
+              e.target.querySelectorAll(".skill-bar-fill").forEach((bar) => {
+                const w = bar.getAttribute("data-width");
+                if (w) bar.style.width = w + "%";
+              });
+            }
           });
-        }
-      });
-    }, { threshold: 0.15 });
+        },
+        { threshold: 0.15 },
+      );
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-  </script>
-</body>
+      document
+        .querySelectorAll(".fade-up")
+        .forEach((el) => observer.observe(el));
+    </script>
+  </body>
 </html>
